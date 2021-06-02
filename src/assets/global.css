@@ -1,0 +1,69 @@
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+html {
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 62.5%;
+  box-sizing: border-box;
+}
+
+body {
+  --body-bg: hsl(0, 0%, 98%);
+  --elem-bg: hsl(0, 0%, 100%);
+  --font-colour: hsl(0, 0%, 13%);
+  --shadow: 0 0 5px hsla(0, 0%, 0%, 0.3);
+  --shadow-hover: 0 0 5px hsla(0, 0%, 0%, 0.5);
+}
+body.dark {
+  --body-bg: hsl(207, 26%, 17%);
+  --elem-bg: hsl(209, 23%, 22%);
+  --font-colour: hsl(0, 0%, 100%);
+  --shadow: 0 0 5px hsla(0, 0%, 100%, 0.3);
+  --shadow-hover: 0 0 5px hsla(0, 0%, 100%, 0.5);
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  font-size: 1.4rem;
+  line-height: 1.2;
+  color: var(--font-colour);
+  background-color: var(--body-bg);
+
+  transition: background-color .1s linear;
+}
+
+.content-wrap {
+  max-width: calc(123.5rem + 6rem);
+  padding: 0 3rem;
+  margin: 0 auto;
+}
+
+select {
+  border: none;
+  padding: 1rem 1.5rem;
+  box-shadow: 0 0 5px 1px hsla(360, 100%, 0%, 0.2);
+  background-color: var(--elem-bg);
+  color: inherit;
+  font-family: inherit;
+  transition: background-color .1s linear, color .1s linear;
+}
+
+button {
+  box-shadow: var(--shadow);
+  background-color: var(--elem-bg);
+  font-family: inherit;
+  font-weight: 300;
+  padding: .5rem 2rem;
+  border-radius: .3rem;
+  border: none;
+  transition: box-shadow .2s linear, background-color .1s linear, color .1s linear;
+  color: inherit;
+}
+button:hover {
+  box-shadow: var(--shadow-hover);
+}
