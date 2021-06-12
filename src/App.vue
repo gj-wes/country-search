@@ -2,11 +2,9 @@
   <the-header></the-header>
   <main class="content-wrap">
     <section class="search-filter" v-show="!detailsViewOpen">
-      <country-search-bar @searchTextChanged="updateSearchText"></country-search-bar>
-      <div>
+        <country-search-bar @searchTextChanged="updateSearchText"></country-search-bar>
         <sort-filter-select @sortFilterChanged="updateSortFilter"></sort-filter-select>
         <region-filter-select @regionFilterChanged="updateRegionFilter"></region-filter-select>
-      </div>
     </section>
     <section class="country-list" v-if="countryData" v-show="!detailsViewOpen">
       <country-card 
@@ -163,7 +161,7 @@ export default {
    flex-wrap: wrap;
  }
  .country-list {
-   margin-top: 4rem;
+   margin: 4rem 0;
    display: grid;
    grid-template-columns: repeat(auto-fill, minmax(26rem, 1fr));
    gap: 6rem;

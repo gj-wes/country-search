@@ -1,9 +1,13 @@
 <template>
-  <input 
-    type="text" 
-    placeholder="Search for a Country..." 
-    v-model="inputSearchText"
-    @keyup="updateSearch">
+  <div>
+    <label for="countryNameSearchInput">Search for Country by name:</label>
+    <input 
+      type="text" 
+      placeholder="United Kingdom..." 
+      v-model="inputSearchText"
+      @keyup="updateSearch"
+      id="countryNameSearchInput">
+  </div>
 </template>
 
 <script>
@@ -23,6 +27,9 @@ export default {
 </script>
 
 <style scoped>
+  div {
+    margin-right: auto;
+  }
   input {
     width: 100%;
     max-width: 48rem;
@@ -33,6 +40,6 @@ export default {
     color: inherit;
     font-family: inherit;
     transition: box-shadow .2s linear, background-color .1s linear, color .1s linear;
-    margin: .8rem auto .8rem 0
+    margin: .8rem 0;
   }
 </style>

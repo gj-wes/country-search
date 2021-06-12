@@ -18,10 +18,12 @@
         <p>Currencies: <span>{{ returnList(details.currencies) }}</span></p>
         <p>Languages: <span>{{ returnList(details.languages) }}</span></p>
       </div>
-      <p v-if="borderCountries.length" class="details-borders">
+      <div v-if="borderCountries.length">
+      <p class="details-borders">
         Border Countries: 
-          <span class="border" v-for="(country, i) of borderCountries" :key="i">{{ country }}</span>
       </p>
+      <span class="border" v-for="(country, i) of borderCountries" :key="i">{{ country }}</span>
+      </div>
     </article>
   </section>
 </template>
@@ -99,13 +101,13 @@ export default {
     }
   }
   .details-borders {
-    margin-top: 4rem;
+    margin: 4rem 0 1rem 0;
   }
   span.border {
     box-shadow: var(--shadow);
     display: inline-block;
     padding: .5rem .8rem;
     border-radius: .3rem;
-    margin: .5rem;
+    margin: 0 1rem 1rem 0;
   }
 </style>
