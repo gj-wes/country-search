@@ -6,17 +6,19 @@
         <sort-filter-select @sortFilterChanged="updateSortFilter"></sort-filter-select>
         <region-filter-select @regionFilterChanged="updateRegionFilter"></region-filter-select>
     </section>
-    <section class="country-list" v-if="countryData" v-show="!detailsViewOpen">
-      <country-card 
-        v-for="(country, i) in countriesWithSearchFilterSort"
-        :key="i"
-        :flag="country.flag"
-        :name="country.name"
-        :population="country.population"
-        :region="country.region"
-        :capital="country.capital"
-        @viewDetails="openDetailView"
-      ></country-card>
+    <section class="country-list-container" ref="listScroll" v-if="countryData" v-show="!detailsViewOpen">
+      <div class="country-list">
+        <country-card 
+          v-for="(country, i) in countriesWithSearchFilterSort"
+          :key="i"
+          :flag="country.flag"
+          :name="country.name"
+          :population="country.population"
+          :region="country.region"
+          :capital="country.capital"
+          @viewDetails="openDetailView"
+        ></country-card>
+      </div>
     </section>
     <div v-else class="loader">Loading...</div>
     <details-view 
@@ -53,11 +55,14 @@ export default {
       detailsViewOpen: false,
       searchInputText: '',
       regionFilter: 'All',
-      sortFilter: 'nameAZ'
+      sortFilter: 'nameAZ',
+      scrollOffset: 0
     }
   },
   methods: {
     openDetailView(e) {
+      this.scrollOffset = this.$refs.listScroll.scrollTop
+
       const selected = this.countryData.filter(country => country.name === e.name)[0]
       this.selectedCountry = selected
       this.detailsViewOpen = true
@@ -65,6 +70,8 @@ export default {
     closeDetailsView() {
       this.detailsViewOpen = false
       this.selectedCountry = null
+
+      this.$refs.listScroll.scrollTop = this.scrollOffset
     },
     updateSearchText(value) {
       this.searchInputText = value.toLowerCase()
@@ -155,13 +162,21 @@ export default {
 </script>
 
 <style scoped>
+ main {
+   height: calc(100vh - 72px);
+   display: flex;
+   flex-direction: column;
+ }
  .search-filter {
-   margin-top: 5rem;
+   margin-top: 4rem;
    display: flex;
    flex-wrap: wrap;
  }
+ .country-list-container {
+   padding: 4rem .2rem;
+   overflow-y: scroll;
+ }
  .country-list {
-   margin: 4rem 0;
    display: grid;
    grid-template-columns: repeat(auto-fill, minmax(26rem, 1fr));
    gap: 6rem;
