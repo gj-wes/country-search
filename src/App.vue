@@ -38,6 +38,8 @@ import SortFilterSelect from './components/SortFilterSelect.vue'
 import CountryCard from './components/CountryCard.vue'
 import DetailsView from './components/DetailsView.vue'
 
+import { getCharCode } from './utils.js'
+
 export default {
   name: 'App',
   components: {
@@ -110,10 +112,10 @@ export default {
       let sortedList
       switch (this.sortFilter) {
         case 'nameAZ':
-          sortedList = searchedAndFiltered.sort((a,b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0))
+          sortedList = searchedAndFiltered.sort((a,b) => (getCharCode(a.name) > getCharCode(b.name)) ? 1 : ((getCharCode(b.name) > getCharCode(a.name)) ? -1 : 0))
           break;
         case 'nameZA':
-          sortedList = searchedAndFiltered.sort((a,b) => (b.name > a.name) ? 1 : ((a.name > b.name) ? -1 : 0))
+          sortedList = searchedAndFiltered.sort((a,b) => (getCharCode(b.name) > getCharCode(a.name)) ? 1 : ((getCharCode(a.name) > getCharCode(b.name)) ? -1 : 0))
           break;
         case 'popAsc':
           sortedList = searchedAndFiltered.sort((a,b) => (b.population > a.population) ? 1 : ((a.population > b.population) ? -1 : 0))
