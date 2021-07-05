@@ -13,23 +13,18 @@
 </template>
 
 <script>
-import { themeSwitcher } from '../utils.js';
 
 export default {
-  data() {
-    return {
-      darkModeActive: false
-    }
-  },
+  emits: ['toggleDarkMode'],
+  props: ['dark-mode-state'],
   computed: {
     buttonText() {
-      return this.darkModeActive ? 'Light mode' : 'Dark mode'
+      return this.darkModeState ? 'Light mode' : 'Dark mode'
     }
   },
   methods: {
     toggleDarkMode() {
-      this.darkModeActive = !this.darkModeActive
-      themeSwitcher();
+      this.$emit('toggleDarkMode')
     }
   }
 }

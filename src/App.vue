@@ -1,5 +1,8 @@
 <template>
-  <the-header></the-header>
+  <the-header 
+    :dark-mode-state="darkModeActive" 
+    @toggleDarkMode="toggleDarkMode"
+  ></the-header>
   <main class="content-wrap">
     <section class="search-filter" v-show="!detailsViewOpen">
         <country-search-bar @searchTextChanged="updateSearchText"></country-search-bar>
@@ -38,7 +41,7 @@ import SortFilterSelect from './components/SortFilterSelect.vue'
 import CountryCard from './components/CountryCard.vue'
 import DetailsView from './components/DetailsView.vue'
 
-import { getCharCode } from './utils.js'
+import { getCharCode, themeSwitcher, checkDarkMode } from './utils.js'
 
 export default {
   name: 'App',
@@ -52,6 +55,7 @@ export default {
   },
   data() {
     return {
+      darkModeActive: false,
       countryData: null,
       selectedCountry: null,
       detailsViewOpen: false,
@@ -62,6 +66,10 @@ export default {
     }
   },
   methods: {
+    toggleDarkMode() {
+      this.darkModeActive = !this.darkModeActive
+      themeSwitcher();
+    },
     openDetailView(e) {
       this.scrollOffset = this.$refs.listScroll.scrollTop
 
@@ -154,6 +162,15 @@ export default {
     }
   },
   async created() {
+    if (checkDarkMode()) {
+      this.darkModeActive = true;
+      themeSwitcher();
+    }
+
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+      this.toggleDarkMode();
+    })
+
     const response = await fetch('https://restcountries.eu/rest/v2/all')
                             .then(res => res.json())
                             .then(data => data)
