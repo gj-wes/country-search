@@ -1,3 +1,10 @@
+export const checkDarkMode = () => {
+  if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    return true;
+  }
+  return false;
+}
+
 export const themeSwitcher = () => {
   const body = document.querySelector('body')
   body.classList.toggle('dark')
